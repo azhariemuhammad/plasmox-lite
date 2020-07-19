@@ -2,7 +2,7 @@ require('dotenv').config()
 
 module.exports = {
   siteMetadata: {
-    title: `Puskemas Namlea`,
+    title: `Puskemas Pasir Limau Kapas`,
     description: `This a very first prototype of plasmox`,
     author: `@azharie_muhammad`,
   },
