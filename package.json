@@ -51,7 +51,7 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "server": "node index.js",
     "bootstrap": "cd server && yarn install && node index.js",
-    "heroku-postbuild": "yarn run server"
+    "heroku-postbuild": "yarn run bootstrap"
   },
   "repository": {
     "type": "git",
