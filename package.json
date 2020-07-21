@@ -50,7 +50,7 @@
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "server": "node ./server/index.js",
-    "bootstrap": "cd server && yarn install"
+    "bootstrap": "cd ./server && yarn install && node index.js"
   },
   "repository": {
     "type": "git",
