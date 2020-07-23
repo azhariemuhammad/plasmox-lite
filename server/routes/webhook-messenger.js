@@ -11,6 +11,7 @@ module.exports = function (app) {
     const challenge = req.query['hub.challenge']
 
     // Checks if a token and mode is in the query string of the request
+    console.log(token, VERIFY_TOKEN)
     if (mode && token) {
       // Checks the mode and token sent is correct
       if (mode === 'subscribe' && token === VERIFY_TOKEN) {
@@ -27,15 +28,14 @@ module.exports = function (app) {
   app.post('/webhook', function (req, res) {
     /* eslint-disable-next-line */
     const body = req.body
-    console.log(body)
 
-    // Checks this is an event from a page subscription
     if (body.object === 'page') {
-      // Iterates over each entry - there may be multiple if batched
       body.entry.forEach(entry => {
         // Gets the message. entry.messaging is an array, but
         // will only ever contain one message, so we get index 0
         const webhookEvent = entry.messaging[0]
+        const senderPSID = webhookEvent.sender.id
+        console.log(`Sender PSID: ${senderPSID}`)
         console.log(webhookEvent)
       })
 
