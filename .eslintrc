@@ -7,25 +7,32 @@
     "es6": true
   },
   "plugins": ["prettier"],
-  "parser": "babel-eslint",
   "rules": {
     "prettier/prettier": ["error"],
-    "react/jsx-filename-extension": [
-      1,
-      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-    ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "import/prefer-default-export": "off",
     "react/jsx-props-no-spreading": "off",
-    "prefer-destructuring": ["error", { "object": false, "array": false }],
-    "space-before-function-paren": [
-      "error",
-      {
-        "anonymous": "always",
-        "named": "always",
-        "asyncArrow": "always"
-      }
-    ]
+    "prefer-destructuring": ["error", { "object": false, "array": false }]
   },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended"
+      ],
+      "settings": {
+        "react": {
+          "version": "detect"
+        }
+      }
+    }
+  ],
   "settings": {
     "import/resolver": {
       "alias": [

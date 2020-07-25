@@ -6,8 +6,8 @@ const TopContent: React.FC = () => {
     <div>
       <h5 style={{ marginBottom: '12px' }}>Apakah anda merasa sakit?</h5>
       <p css={contentText}>
-        Jika anda merasa sakit dengan gejala demam. Mohon untuk melapor. Petugas
-        kami akan menghubungi segera.
+        Jika anda merasa sakit dengan gejala demam. Mohon untuk mengisi formulir
+        dibawah ini. Data akan dikirim melalui pesan Whatsaap ke petugas kami.
       </p>
     </div>
   )

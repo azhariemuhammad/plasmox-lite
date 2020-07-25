@@ -21,6 +21,7 @@ export const TextField = styled('div')`
     padding: 0 4px;
     margin-top: 4px;
     outline-color: #63abff;
+    resize: none;
   }
   > .input__textarea {
     height: 87px;
@@ -30,11 +31,11 @@ export const TextField = styled('div')`
 `
 
 export const formContainer = css({
-  margin: '16px 0',
+  margin: '16px 0'
 })
 
 export const labelInput = css({
-  padding: '4px 0',
+  padding: '4px 0'
 })
 
 export const Button = styled('button')`

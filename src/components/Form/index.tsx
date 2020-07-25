@@ -12,13 +12,13 @@ const FormContainer = () => {
     name: '',
     age: '',
     gender: '',
-    address: '',
+    address: ''
   })
   const [errors, setErrors] = useState({
     name: 'Belum diisi',
     age: 'Belum diisi',
     gender: 'Belum diisi',
-    address: 'Belum diisi',
+    address: 'Belum diisi'
   })
   const [isAllFilled, setIsAllFilled] = useState(false)
   const [isValid, setIsValid] = useState(false)
@@ -83,7 +83,7 @@ const FormContainer = () => {
   }
 
   return (
-    <div>
+    <form id="lapor-malaria">
       <div>
         <div css={formContainer}>
           <label css={labelInput} htmlFor="name">
@@ -132,7 +132,7 @@ const FormContainer = () => {
       <Button disabled={!isAllFilled} onClick={handleSubmit}>
         Lapor Sekarang
       </Button>
-    </div>
+    </form>
   )
 }
 

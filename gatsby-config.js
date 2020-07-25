@@ -5,7 +5,23 @@ module.exports = {
     author: `@azharie_muhammad`
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        // replace "UA-XXXXXXXXX-X" with your own Tracking ID
+        trackingId: process.env.GATSBY_GOOGLE_ANALYTICS_TRACKING_ID || 'none'
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-google-tagmanager',
+      options: {
+        id: process.env.GATSBY_GOOGLE_TAG_MANAGER_ID || 'none',
+        includeInDevelopment: false,
+        defaultDataLayer: { platform: 'gatsby' }
+      }
+    },
     `gatsby-plugin-react-helmet`,
+    'gatsby-plugin-typescript',
     {
       resolve: `gatsby-source-filesystem`,
       options: {

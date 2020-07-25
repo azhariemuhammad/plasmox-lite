@@ -13,7 +13,7 @@ const TextAreaField: React.FC<ITextarea> = ({
   placeholder,
   name,
   handleOnChange,
-  value,
+  value
 }) => {
   return (
     <TextField>
