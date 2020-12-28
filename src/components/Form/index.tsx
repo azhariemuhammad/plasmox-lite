@@ -1,11 +1,12 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/core';
 
-import { useState, useEffect, useCallback } from 'react'
-import TextField from './TextField'
-import TextAreaField from './Textarea'
-import { formContainer, labelInput, Button } from './styles'
-import { getLinkWhastapp } from '../../utils/whatsapp-web'
+import { useState, useEffect, useCallback } from 'react';
+import TextField from './TextField';
+import TextAreaField from './Textarea';
+import { formContainer, labelInput, Button } from './styles';
+
+import BarcodeComponent from '../Barcode';
 
 const FormContainer = () => {
   const [formReport, setFormReport] = useState({
@@ -13,74 +14,75 @@ const FormContainer = () => {
     age: '',
     gender: '',
     address: '',
-  })
+    result: '',
+  });
+  const [openBarcode, setOpenBarcode] = useState(false);
   const [errors, setErrors] = useState({
     name: 'Belum diisi',
     age: 'Belum diisi',
     gender: 'Belum diisi',
     address: 'Belum diisi',
-  })
-  const [isAllFilled, setIsAllFilled] = useState(false)
-  const [isValid, setIsValid] = useState(false)
+    result: 'Belum diisi',
+  });
+  const [isAllFilled, setIsAllFilled] = useState(false);
+  const [isValid, setIsValid] = useState(false);
   const handleOnChange = (e: { target: { name: any; value: any } }) => {
-    event.preventDefault()
-    console.log(e.target.name, e.target.value)
-    const { name, value } = e.target
-    const newVal = { [name]: value }
-    const newErrors = errors
+    event.preventDefault();
+    console.log(e.target.name, e.target.value);
+    const { name, value } = e.target;
+    const newVal = { [name]: value };
+    const newErrors = errors;
     switch (name) {
       case 'name':
-        newErrors.name = value.length > 2 ? '' : 'Nama belum diisi'
-        break
+        newErrors.name = value.length > 2 ? '' : 'Nama belum diisi';
+        break;
       case 'age':
-        newErrors.age = value.length > 0 ? '' : 'Umur belum diisi'
-        break
+        newErrors.age = value.length > 0 ? '' : 'Umur belum diisi';
+        break;
       case 'gender':
-        newErrors.gender = value.length > 0 ? '' : 'Jenis Kelamin belum diisi'
-        break
+        newErrors.gender = value.length > 0 ? '' : 'Jenis Kelamin belum diisi';
+        break;
       case 'address':
-        newErrors.address = value.length > 0 ? '' : 'Alamat belum diisi'
-        break
+        newErrors.address = value.length > 0 ? '' : 'Alamat belum diisi';
+        break;
+      case 'result':
+        newErrors.result = value.length > 0 ? '' : 'Alamat belum diisi';
+        break;
       default:
-        break
+        break;
     }
 
-    setErrors({ ...errors, ...newErrors })
-    setFormReport({ ...formReport, ...newVal })
-  }
+    setErrors({ ...errors, ...newErrors });
+    setFormReport({ ...formReport, ...newVal });
+  };
 
   const handleValidation = useCallback(() => {
-    let counter = 0
-    Object.keys(formReport).map(item => {
-      if (formReport[item].length > 1) counter++
-    })
+    let counter = 0;
+    Object.keys(formReport).map((item) => {
+      if (formReport[item].length > 1) counter++;
+    });
 
-    if (counter === 4) {
-      setIsAllFilled(true)
+    if (counter === 5) {
+      setIsAllFilled(true);
     } else {
-      setIsAllFilled(false)
+      setIsAllFilled(false);
     }
-  }, [errors])
+  }, [errors]);
 
   useEffect(() => {
     if (formReport) {
-      handleValidation()
+      handleValidation();
     }
-  }, [formReport])
+  }, [formReport]);
 
   const generateMsg = () => {
-    const { name, age, gender, address } = formReport
-    return `Lapor Malaria: ${name}, ${age}, ${gender}, ${address}`
-  }
+    const { name, age, gender, address } = formReport;
+    return `Lapor Malaria: ${name}, ${age}, ${gender}, ${address}`;
+  };
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    const link = getLinkWhastapp(generateMsg())
-    console.log(link)
-    if (link) {
-      window.location.href = link
-    }
-  }
+  const handleSubmit = (e) => {
+    setOpenBarcode(true);
+  };
 
   return (
     <div>
@@ -128,12 +130,24 @@ const FormContainer = () => {
             name="address"
           />
         </div>
+        <div css={formContainer}>
+          <label css={labelInput} htmlFor="gender">
+            Hasil Pemeriksaan
+          </label>
+          <TextField
+            css={formContainer}
+            handleOnChange={handleOnChange}
+            name="result"
+          />
+        </div>
       </div>
+      {openBarcode && <BarcodeComponent report={formReport} />}
+
       <Button disabled={!isAllFilled} onClick={handleSubmit}>
-        Lapor Sekarang
+        Generate QR
       </Button>
     </div>
-  )
-}
+  );
+};
 
-export default FormContainer
+export default FormContainer;

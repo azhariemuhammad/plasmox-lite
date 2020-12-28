@@ -1,16 +1,15 @@
-import * as React from 'react'
+import * as React from 'react';
 
-import { contentText } from './styles'
+import { contentText } from './styles';
 const TopContent: React.FC = () => {
   return (
     <div>
-      <h5 style={{ marginBottom: '12px' }}>Apakah anda merasa sakit?</h5>
+      <h5 style={{ marginBottom: '12px' }}>Validasi Hasil</h5>
       <p css={contentText}>
-        Jika anda merasa sakit dengan gejala demam. Mohon untuk melapor. Petugas
-        kami akan menghubungi segera.
+        Dengan ini menyatakan bahwa hasil pemeriksaan tervalidasi.
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default TopContent
+export default TopContent;
